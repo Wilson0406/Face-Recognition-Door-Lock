@@ -25,7 +25,7 @@ while q<=2:
     model.train(np.asarray(Training_data),np.asarray(Lebels))
     print("training complete")
     q+=1
-face_classifier = cv2.CascadeClassifier('C:\\Users\\risha\\AppData\\Local\\Programs\\Python\\Python39\Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml')
+face_classifier = cv2.CascadeClassifier('D:\\Downloads\\Face Recognition Door Lock/haarcascade_frontalface_default.xml')
 
 
 def speak(audio):
@@ -90,11 +90,14 @@ cap.release()
 cv2.destroyAllWindows()
 if x>=5:
     m=1
-    ard = serial.Serial('com5' ,9600)
+    ard = serial.Serial('com9' ,9600)
     time.sleep(2)
     var = 'a'
     c=var.encode()
-    speak("Face recognition complete..it is matching with database...welcome..sir..Door is openning for 5 seconds")
+    speak("Face recognition complete..")
+    speak("Face is matching with database...")
+    speak("Welcome home..boss..")
+    speak("Door is openning for 5 seconds")
     ard.write(c)
     time.sleep(4)
 elif c==30:
@@ -103,4 +106,3 @@ elif d==20:
     speak("face is not found please try again ")
 if m==1:  
     speak("door is closing")
-            
