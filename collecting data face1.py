@@ -1,7 +1,19 @@
 import cv2
+import pyttsx3
 import numpy as np
 
-face_classifier = cv2.CascadeClassifier('C:\\Users\\risha\\AppData\\Local\\Programs\\Python\\Python39\Lib/site-packages/cv2/data/haarcascade_frontalface_default.xml')
+
+face_classifier = cv2.CascadeClassifier('D:\\Downloads\\Face Recognition Door Lock/haarcascade_frontalface_default.xml')
+
+def speak(audio):
+    engine.say(audio)
+    engine.runAndWait()
+engine = pyttsx3.init('sapi5')
+voices=engine.getProperty('voices')
+engine.setProperty("voice",voices[0].id)
+engine.setProperty("rate",140)
+engine.setProperty("volume",1000)
+
 
 def face_extractor(img):
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -13,7 +25,7 @@ def face_extractor(img):
     return cropped_face
 cap = cv2.VideoCapture(0)
 count = 0
-
+speak("please look into the camera..")
 while True:
     ret,frame = cap.read()
     if face_extractor(frame) is not None:
@@ -28,6 +40,7 @@ while True:
         cv2.imshow("face cropper",face)
     else:
         print('face not found')
+        speak("face not found..")
         pass
     if cv2.waitKey(1)==13 or count==10:
         break
